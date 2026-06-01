@@ -1,11 +1,11 @@
+import React, { useContext, useRef, useEffect } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { useContext, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { NavbarContext } from "../../context/NavContext";
 import navImg1 from "../../assets/1.jpg";
-import navImg2 from "../../assets/2.jpg";
-import navImg3 from "../../assets/3.png";
+import navImg2 from "../../assets/2.webp";
+import navImg3 from "../../assets/3.jpg";
 import navImg4 from "../../assets/4.jpg";
 
 const navItems = [
@@ -22,11 +22,17 @@ const navItems = [
     image: navImg3,
   },
   {
-    label: "Projects",
-    kicker: "Selected work",
-    path: "#projects",
-    image: navImg2,
+    label: "Resume",
+    kicker: "Experience and CV",
+    path: "#resume",
+    image: navImg1,
   },
+  // {
+  //   label: "Projects",
+  //   kicker: "Selected work",
+  //   path: "#projects",
+  //   image: navImg2,
+  // },
   {
     label: "Contact",
     kicker: "Work together",
@@ -167,7 +173,7 @@ const FullScreenNav = () => {
           </Link>
 
           <div className="hidden pt-1 font-[font1] text-xs uppercase tracking-[0.22em] text-white/65 md:block">
-            Menu / 04
+            Menu / {String(navItems.length).padStart(2, "0")}
           </div>
 
           <button

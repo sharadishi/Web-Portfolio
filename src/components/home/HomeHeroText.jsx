@@ -1,3 +1,4 @@
+import React from "react";
 import Video from "./Video";
 import HeroBottomText from "./HomeBottomText";
 
@@ -6,19 +7,19 @@ const HomeHeroText = () => {
     <section className="mx-auto flex w-full max-w-[1800px] flex-1 flex-col font-[font1] px-4 sm:px-6">
       <div className="mb-6 grid gap-2 border-b border-white/20 pb-4 font-[font1] text-[10px] uppercase text-white/65 sm:grid-cols-3 sm:gap-3 lg:mb-5 lg:text-sm">
         <span className="text-center sm:text-left">SHARAD ISHI</span>
-        <span className="sm:text-center">
-          Web Designer &amp; Frontend Developer
+        <span className="sm:text-center">Senior Frontend Engineer</span>
+        <span className="text-center sm:text-right">
+          Next.js, TypeScript, React
         </span>
-        <span className="text-center sm:text-right">React, Tailwind, UI</span>
       </div>
 
       <p className="mx-auto mb-6 max-w-3xl text-center font-[font1] text-[10px] uppercase tracking-[0.22em] text-[var(--color-accent)] sm:text-xs lg:text-base">
-        I design premium web experiences with React, Tailwind, and motion-rich
-        UI.
+        I build high-performance, scalable web apps with Next.js, TypeScript,
+        React, and Tailwind CSS.
       </p>
 
       <h1 className="text-center font-[font2] text-[14vw] uppercase leading-[0.78] sm:text-[16vw] lg:text-[7vw]">
-        Sr. Software Web Designer
+        Senior Frontend Engineer
       </h1>
 
       <div className="mt-3 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-center font-[font2] text-[10vw] uppercase leading-[0.84] sm:text-[12vw] lg:gap-5 lg:text-[7vw]">

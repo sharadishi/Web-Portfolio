@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -20,7 +20,7 @@ const Contact = () => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const mailto = `mailto:Sharad09aeshi@gmail.com?subject=Contact from ${encodeURIComponent(formData.name)}&body=${encodeURIComponent(formData.message)}%0A%0A— ${encodeURIComponent(formData.name)} (${encodeURIComponent(formData.email)})`;
+    const mailto = `mailto:sharad09aeshi@gmail.com?subject=Contact from ${encodeURIComponent(formData.name)}&body=${encodeURIComponent(formData.message)}%0A%0A— ${encodeURIComponent(formData.name)} (${encodeURIComponent(formData.email)})`;
     window.location.href = mailto;
     setSent(true);
     setTimeout(() => setSent(false), 4000);
@@ -53,9 +53,33 @@ const Contact = () => {
           <p className="font-[font1] text-sm uppercase tracking-[0.25em] text-[var(--color-accent)]">
             Contact
           </p>
-          <h1 className="mt-5 max-w-5xl font-[font2] text-[18vw] uppercase leading-[0.78] lg:text-[6vw]">
+          <h1 className="mt-5 max-w-5xl font-[font2] text-[16vw] uppercase leading-[0.8] sm:text-[18vw] lg:text-[6vw]">
             Lets build something sharp.
           </h1>
+          <a
+            href="/Sharad-Aeshi-Resume.pdf"
+            download
+            className="group mt-8 inline-flex w-fit items-center gap-3 overflow-hidden rounded-full border border-white/25 px-7 py-3 font-[font1] text-xs uppercase tracking-[0.2em] transition-colors duration-300 hover:border-[var(--color-accent)] sm:text-sm"
+          >
+            <span className="relative z-10 transition-colors duration-300 group-hover:text-black">
+              Download Resume
+            </span>
+            <svg
+              className="relative z-10 h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5 group-hover:text-black"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            <span className="absolute inset-0 origin-left scale-x-0 bg-[var(--color-accent)] transition-transform duration-500 group-hover:scale-x-100" />
+          </a>
         </div>
 
         <div className="grid gap-12 lg:grid-cols-[1.2fr_0.9fr]">
@@ -122,23 +146,32 @@ const Contact = () => {
             <div className="space-y-5 font-[font1] text-xl lg:text-2xl">
               <a
                 className="group inline-flex items-center gap-3 border-b border-white/25 pb-4 transition-colors hover:text-[var(--color-accent)]"
-                href="mailto:Sharad09aeshi@gmail.com"
+                href="mailto:sharad09aeshi@gmail.com"
               >
                 <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/20 text-xs uppercase tracking-wider text-white/60 transition-colors group-hover:border-[var(--color-accent)] group-hover:text-[var(--color-accent)]">
                   @
                 </span>
-                <span className="truncate">Sharad09aeshi@gmail.com</span>
+                <span className="truncate">sharad09aeshi@gmail.com</span>
               </a>
               <a
                 className="group inline-flex items-center gap-3 border-b border-white/25 pb-4 transition-colors hover:text-[var(--color-accent)]"
-                href="https://linkedin.com/in/Sharaadishi091294"
+                href="tel:+917229073755"
+              >
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/20 text-xs uppercase tracking-wider text-white/60 transition-colors group-hover:border-[var(--color-accent)] group-hover:text-[var(--color-accent)]">
+                  #
+                </span>
+                <span className="truncate">+91 777 8910 717</span>
+              </a>
+              <a
+                className="group inline-flex items-center gap-3 border-b border-white/25 pb-4 transition-colors hover:text-[var(--color-accent)]"
+                href="https://www.linkedin.com/in/sharaadishi091294/"
                 target="_blank"
                 rel="noreferrer"
               >
                 <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/20 text-xs uppercase tracking-wider text-white/60 transition-colors group-hover:border-[var(--color-accent)] group-hover:text-[var(--color-accent)]">
                   in
                 </span>
-                <span className="truncate">/in/Sharaadishi091294</span>
+                <span className="truncate">/in/sharaadishi091294</span>
               </a>
               <a
                 className="group inline-flex items-center gap-3 border-b border-white/25 pb-4 transition-colors hover:text-[var(--color-accent)]"

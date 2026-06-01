@@ -1,6 +1,8 @@
+import React from "react";
 import HomeHeroText from "../components/home/HomeHeroText";
 import Agence from "./Agence";
-import Projects from "./Projects";
+import Resume from "./Resume";
+// import Projects from "./Projects";
 import Contact from "./Contact";
 
 const Home = () => {
@@ -16,7 +18,8 @@ const Home = () => {
         </div>
       </main>
       <Agence />
-      <Projects />
+      <Resume />
+      {/* <Projects /> */}
       <Contact />
     </>
   );
