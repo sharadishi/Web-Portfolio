@@ -1,69 +1,107 @@
-import React, { useEffect, useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import PropTypes from "prop-types";
+import { useCallback, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 
-const Stairs = (props) => {
-  const currentPath = useLocation().pathname;
+const Stairs = ({ children }) => {
+  const location = useLocation();
   const stairParentRef = useRef(null);
   const pageRef = useRef(null);
-
-  function playStairsAnimation() {
-    const tl = gsap.timeline();
-    tl.to(stairParentRef.current, {
-      display: "block",
-    });
-    tl.from(".stair", {
-      height: 0,
-      stagger: {
-        amount: -0.2,
-      },
-    });
-    tl.to(".stair", {
-      y: "100%",
-      stagger: {
-        amount: -0.25,
-      },
-    });
-    tl.to(stairParentRef.current, {
-      display: "none",
-    });
-    tl.to(".stair", {
-      y: "0%",
-    });
-
-    gsap.from(pageRef.current, {
-      opacity: 0,
-      delay: 1.3,
-      scale: 1.2,
-    });
-  }
-
+  const timelineRef = useRef(null);
   const isFirstRender = useRef(true);
 
-  useEffect(function () {
-    window.addEventListener("section:navigate", playStairsAnimation);
+  const playStairsAnimation = useCallback(() => {
+    const stairParent = stairParentRef.current;
+    const page = pageRef.current;
 
-    return function () {
-      window.removeEventListener("section:navigate", playStairsAnimation);
-    };
+    if (!stairParent || !page) return;
+
+    const stairs = gsap.utils.toArray(".stair", stairParent);
+
+    timelineRef.current?.kill();
+    gsap.killTweensOf([stairParent, page, ...stairs]);
+
+    gsap.set(stairParent, { display: "block" });
+    gsap.set(stairs, { height: "100%", y: "0%" });
+
+    const timeline = gsap.timeline({
+      onComplete: () => {
+        gsap.set(stairParent, { display: "none" });
+        gsap.set(stairs, { y: "0%" });
+      },
+    });
+
+    timelineRef.current = timeline;
+
+    timeline
+      .fromTo(
+        stairs,
+        { height: 0 },
+        {
+          height: "100%",
+          duration: 0.45,
+          ease: "power2.inOut",
+          stagger: {
+            amount: -0.2,
+          },
+        },
+      )
+      .to(stairs, {
+        y: "100%",
+        duration: 0.55,
+        ease: "power3.inOut",
+        stagger: {
+          amount: -0.25,
+        },
+      });
+
+    gsap.fromTo(
+      page,
+      {
+        opacity: 0,
+        scale: 1.08,
+      },
+      {
+        opacity: 1,
+        scale: 1,
+        delay: 0.85,
+        duration: 0.55,
+        ease: "power2.out",
+        overwrite: "auto",
+      },
+    );
   }, []);
 
+  useEffect(() => {
+    playStairsAnimation();
+    isFirstRender.current = false;
+
+    window.addEventListener("section:navigate", playStairsAnimation);
+
+    return () => {
+      timelineRef.current?.kill();
+      window.removeEventListener("section:navigate", playStairsAnimation);
+    };
+  }, [playStairsAnimation]);
+
   useGSAP(
-    function () {
-      if (isFirstRender.current) {
-        isFirstRender.current = false;
-        return;
+    () => {
+      // Play animation on real route changes, but leave hash section clicks to the custom event.
+      if (!isFirstRender.current) {
+        playStairsAnimation();
       }
-      playStairsAnimation();
     },
-    [currentPath],
+    { dependencies: [location.pathname], scope: stairParentRef },
   );
 
   return (
     <div className="overflow-hidden">
-      <div ref={stairParentRef} className="h-screen w-full fixed z-[70] top-0">
-        <div className="h-full w-full flex">
+      <div
+        ref={stairParentRef}
+        className="fixed top-0 z-[90] hidden h-screen w-full"
+      >
+        <div className="flex h-full w-full">
           <div className="stair h-full w-1/5 bg-black"></div>
           <div className="stair h-full w-1/5 bg-black"></div>
           <div className="stair h-full w-1/5 bg-black"></div>
@@ -71,9 +109,13 @@ const Stairs = (props) => {
           <div className="stair h-full w-1/5 bg-black"></div>
         </div>
       </div>
-      <div ref={pageRef}>{props.children}</div>
+      <div ref={pageRef}>{children}</div>
     </div>
   );
+};
+
+Stairs.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export default Stairs;

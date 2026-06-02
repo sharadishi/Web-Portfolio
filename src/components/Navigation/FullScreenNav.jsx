@@ -1,7 +1,7 @@
 import React, { useContext, useRef, useEffect } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { NavbarContext } from "../../context/NavContext";
 import navImg1 from "../../assets/1.jpg";
 import navImg2 from "../../assets/2.webp";
@@ -43,6 +43,7 @@ const navItems = [
 
 const FullScreenNav = () => {
   const fullScreenRef = useRef(null);
+  const navigate = useNavigate();
   const [navOpen, setNavOpen] = useContext(NavbarContext);
 
   // Prevent body scroll when nav is open
@@ -63,7 +64,7 @@ const FullScreenNav = () => {
     if (!target) return;
 
     window.dispatchEvent(new CustomEvent("section:navigate"));
-    window.history.replaceState(null, "", path);
+    navigate(path, { replace: true });
 
     setTimeout(() => {
       const sectionTop =
