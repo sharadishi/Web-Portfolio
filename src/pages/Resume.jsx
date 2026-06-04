@@ -5,8 +5,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Public asset — file lives in /public/Sharad-Aeshi-Resume.pdf
-const RESUME_FILE = "/Sharad-Aeshi-Resume.pdf";
+// Public asset — file lives in /public/SHARAD_CV.pdf
+const RESUME_FILE = "/SHARAD_CV.pdf";
 
 const summary =
   "Senior Frontend Engineer with 9+ years of experience building high-performance, scalable web applications. Expert in Next.js, TypeScript, React.js, and Tailwind CSS with a proven record of architecting complex, real-time interfaces for enterprise platforms.";
@@ -88,24 +88,6 @@ const Resume = () => {
               Resume
             </h1>
           </div>
-
-          {/* Download button */}
-          <a
-            href={RESUME_FILE}
-            download="Sharad-Aeshi-Resume.pdf"
-            className="group relative inline-flex shrink-0 items-center gap-3 self-start overflow-hidden rounded-full border border-black/25 px-8 py-4 font-[font1] text-sm uppercase tracking-[0.2em] transition-colors duration-300 hover:border-[var(--color-accent)] lg:self-auto"
-          >
-            <span className="relative z-10 transition-colors duration-300 group-hover:text-black">
-              Download PDF
-            </span>
-            <span
-              aria-hidden="true"
-              className="relative z-10 transition-transform duration-300 group-hover:translate-y-0.5"
-            >
-              ↓
-            </span>
-            <span className="absolute inset-0 origin-left scale-x-0 bg-[var(--color-accent)] transition-transform duration-500 group-hover:scale-x-100" />
-          </a>
         </div>
 
         {/* ── Summary ── */}

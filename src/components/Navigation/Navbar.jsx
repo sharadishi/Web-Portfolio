@@ -23,14 +23,14 @@ const Navbar = () => {
 
   return (
     <div
-      className={`z-[60] flex fixed items-center justify-between inset-x-4 top-4 lg:px-12 px-8 h-16 transition-colors duration-300 ${scrolled ? "rounded-full bg-black overflow-hidden" : "bg-transparent rounded-t-2xl overflow-hidden"}`}
+      className={`z-[60] flex fixed items-center justify-between inset-x-4 top-4 lg:px-12 px-8 h-16 transition-colors duration-300 ${scrolled ? "rounded-full bg-[var(--color-menu-bg)] overflow-hidden" : "bg-transparent rounded-t-2xl overflow-hidden"}`}
     >
       <Link to="/" className="block h-full flex items-center">
         <img src={logoSm} alt="Sharad" className="h-10 w-auto md:hidden" />
         <img
           src={logoLg}
           alt="Sharad"
-          className="hidden h-12 w-auto md:block lg:h-16 object-contain"
+          className="hidden h-8 w-auto md:block lg:h-10 object-contain"
         />
       </Link>
       <button

@@ -1,3 +1,5 @@
+import React from "react";
+
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import PropTypes from "prop-types";

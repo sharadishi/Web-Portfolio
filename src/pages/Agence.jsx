@@ -465,7 +465,7 @@ const Agence = () => {
             <span className="sm:text-right">Surat, Gujarat, India</span>
           </div>
 
-          <div className="hero-trigger grid gap-10 pt-14 sm:pt-20 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16 lg:pt-28">
+          <div className="hero-trigger grid gap-10 pt-14 sm:pt-20 lg:grid-cols-[1fr_1.15fr] lg:gap-16 lg:pt-28">
             <div className="hero-fade-up">
               <p className="font-[font1] text-xs uppercase tracking-[0.28em] text-black/45 sm:text-sm lg:text-base">
                 Senior Frontend Engineer
@@ -489,15 +489,21 @@ const Agence = () => {
 
               {/* Resume download */}
               <a
-                href="/Sharad-Aeshi-Resume.pdf"
+                href="/SHARAD_CV.pdf"
                 download
-                className="group inline-flex w-fit items-center gap-3 overflow-hidden rounded-full border border-black/25 px-7 py-3 font-[font1] text-xs uppercase tracking-[0.2em] transition-colors duration-300 hover:border-[var(--color-accent)] sm:text-sm"
+                className="relative group inline-flex w-fit items-center gap-3 overflow-hidden rounded-full border border-black/25 px-7 py-3 font-[font1] text-xs uppercase tracking-[0.2em] transition-colors duration-300 hover:border-[var(--color-accent)] sm:text-sm"
               >
                 <span className="relative z-10 transition-colors duration-300 group-hover:text-black">
                   Download Resume
                 </span>
                 <svg
-                  className="relative z-10 h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5 group-hover:text-black"
+                  style={{
+                    width: "16px",
+                    height: "16px",
+                    minWidth: "16px",
+                    minHeight: "16px",
+                  }}
+                  className="relative z-10 transition-transform duration-300 group-hover:translate-y-0.5 group-hover:text-black"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -510,7 +516,7 @@ const Agence = () => {
                   <polyline points="7 10 12 15 17 10" />
                   <line x1="12" y1="15" x2="12" y2="3" />
                 </svg>
-                <span className="absolute inset-0 origin-left scale-x-0 bg-[var(--color-accent)] transition-transform duration-500 group-hover:scale-x-100" />
+                <span className="absolute inset-0 scale-0 rounded-full bg-[var(--color-accent)] opacity-0 transition-all duration-500 ease-out group-hover:scale-100 group-hover:opacity-100" />
               </a>
             </div>
           </div>

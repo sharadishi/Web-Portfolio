@@ -11,6 +11,7 @@ const Contact = () => {
     email: "",
     message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [sent, setSent] = useState(false);
   const sectionRef = useRef(null);
 
@@ -18,12 +19,40 @@ const Contact = () => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    const mailto = `mailto:sharad09aeshi@gmail.com?subject=Contact from ${encodeURIComponent(formData.name)}&body=${encodeURIComponent(formData.message)}%0A%0A— ${encodeURIComponent(formData.name)} (${encodeURIComponent(formData.email)})`;
-    window.location.href = mailto;
-    setSent(true);
-    setTimeout(() => setSent(false), 4000);
+    setIsSubmitting(true);
+
+    // Note: You need to create a free account at Formspree.io,
+    // create a new form, and replace 'YOUR_FORM_ID' below with your actual Form ID.
+    const FORMSPREE_ID = "meewqpvl";
+
+    try {
+      const response = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setSent(true);
+        setFormData({ name: "", email: "", message: "" });
+        setTimeout(() => setSent(false), 5000);
+      } else {
+        alert(
+          "Oops! There was a problem submitting your form. Please try again or use the email link below.",
+        );
+      }
+    } catch (error) {
+      alert(
+        "Something went wrong. Please check your connection and try again.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   useGSAP(() => {
@@ -56,30 +85,6 @@ const Contact = () => {
           <h1 className="mt-5 max-w-5xl font-[font2] text-[16vw] uppercase leading-[0.8] sm:text-[18vw] lg:text-[6vw]">
             Lets build something sharp.
           </h1>
-          <a
-            href="/Sharad-Aeshi-Resume.pdf"
-            download
-            className="group mt-8 inline-flex w-fit items-center gap-3 overflow-hidden rounded-full border border-white/25 px-7 py-3 font-[font1] text-xs uppercase tracking-[0.2em] transition-colors duration-300 hover:border-[var(--color-accent)] sm:text-sm"
-          >
-            <span className="relative z-10 transition-colors duration-300 group-hover:text-black">
-              Download Resume
-            </span>
-            <svg
-              className="relative z-10 h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5 group-hover:text-black"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-              <polyline points="7 10 12 15 17 10" />
-              <line x1="12" y1="15" x2="12" y2="3" />
-            </svg>
-            <span className="absolute inset-0 origin-left scale-x-0 bg-[var(--color-accent)] transition-transform duration-500 group-hover:scale-x-100" />
-          </a>
         </div>
 
         <div className="grid gap-12 lg:grid-cols-[1.2fr_0.9fr]">
@@ -132,12 +137,19 @@ const Contact = () => {
             </div>
             <button
               type="submit"
-              className="group relative overflow-hidden rounded-full border border-white/25 px-8 py-3 font-[font1] text-sm uppercase tracking-[0.2em] transition-all duration-300 hover:border-[var(--color-accent)]"
+              disabled={isSubmitting || sent}
+              className="group relative overflow-hidden rounded-full border border-white/25 px-8 py-3 font-[font1] text-sm uppercase tracking-[0.2em] transition-all duration-300 hover:border-[var(--color-accent)] disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <span className="relative z-10 transition-colors duration-300 group-hover:text-black">
-                {sent ? "Message sent!" : "Send message"}
+                {sent
+                  ? "Message sent!"
+                  : isSubmitting
+                    ? "Sending..."
+                    : "Send message"}
               </span>
-              <span className="absolute inset-0 origin-left scale-x-0 bg-[var(--color-accent)] transition-transform duration-500 group-hover:scale-x-100" />
+              {!sent && !isSubmitting && (
+                <span className="absolute inset-0 scale-0 rounded-full bg-[var(--color-accent)] opacity-0 transition-all duration-500 ease-out group-hover:scale-100 group-hover:opacity-100" />
+              )}
             </button>
           </form>
 
